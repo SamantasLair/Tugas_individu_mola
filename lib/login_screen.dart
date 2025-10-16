@@ -11,11 +11,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // ==================== State & Controller ====================
-
-  /// Kunci global untuk mengelola state dan validasi Form.
   final _formKey = GlobalKey<FormState>();
-
-  /// Mengontrol visibilitas teks pada field password.
   bool _obscureText = true;
 
   // ==================== Logic Methods ====================
