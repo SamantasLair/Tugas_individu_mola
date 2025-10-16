@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'note_model.dart';
 import 'profile_screen.dart';
 
+/// Halaman utama aplikasi yang menampilkan daftar semua catatan.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -10,6 +11,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // ==================== State Variables ====================
+  // Berisi data-data yang digunakan untuk membangun UI.
+
+  /// Data dummy untuk daftar catatan.
   final List<Note> _notes = [
     Note(
       title: 'Resep Nasi Goreng',
@@ -33,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
 
+  /// Palet warna untuk setiap kartu catatan.
   final List<Color> _noteColors = [
     Colors.amber.shade200,
     Colors.lightGreen.shade200,
@@ -42,10 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
     Colors.tealAccent.shade100,
   ];
 
+  // ==================== Build Method ====================
+  // Metode utama yang merender seluruh tampilan UI halaman ini.
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
+
+      // ---------- App Bar ----------
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black87),
         backgroundColor: const Color(0xFFF5F5F5),
@@ -59,6 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
       ),
+
+      // ---------- Navigation Drawer ----------
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -110,15 +123,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+
+      // ---------- Body Content ----------
       body: _notes.isEmpty
-          ? const Center(
+          // Tampilkan pesan jika tidak ada catatan, jika ada tampilkan list.
+          ? const Center( // --- UI Saat Catatan Kosong ---
               child: Text(
                 'Belum ada catatan.\nTekan tombol + untuk memulai!',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
             )
-          : ListView.builder(
+          : ListView.builder( // --- UI Saat Ada Catatan (ListView) ---
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               itemCount: _notes.length,
               itemBuilder: (context, index) {
@@ -156,6 +172,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
+
+      // ---------- Floating Action Button ----------
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: const Color(0xFF312E2B),

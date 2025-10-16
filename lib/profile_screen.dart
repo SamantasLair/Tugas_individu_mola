@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Halaman yang menampilkan detail profil pengguna dan statistik aktivitas.
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -8,10 +9,15 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  // ==================== Build Method ====================
+  // Metode utama yang merender seluruh UI halaman profil.
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
+
+      // ---------- App Bar ----------
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black87),
         title: const Text(
@@ -21,9 +27,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: const Color(0xFFF5F5F5),
         elevation: 0,
       ),
+
+      // ---------- Body Content ----------
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
+          // --- Bagian Foto Profil ---
           Center(
             child: Stack(
               alignment: Alignment.bottomRight,
@@ -48,6 +57,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           const SizedBox(height: 24),
+
+          // --- Bagian Informasi Pengguna ---
           Card(
             elevation: 2,
             shape: RoundedRectangleBorder(
@@ -67,6 +78,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           const SizedBox(height: 24),
+
+          // --- Bagian Statistik ---
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
@@ -100,6 +113,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  // ==================== Helper Widgets ====================
+
+  /// Membangun sebuah Card untuk menampilkan satu item statistik.
+  ///
+  /// - @param title Judul statistik (misal: 'Catatan Dibuat').
+  /// - @param value Nilai statistik (misal: '58').
+  /// - @param icon Ikon yang relevan dengan statistik.
+  /// - @param iconColor Warna untuk ikon.
   Widget _buildStatCard(
       String title, String value, IconData icon, Color iconColor) {
     return Card(

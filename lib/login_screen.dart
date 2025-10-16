@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 
+/// Halaman untuk autentikasi pengguna, baik melalui email atau media sosial.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -9,9 +10,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // ==================== State & Controller ====================
+
+  /// Kunci global untuk mengelola state dan validasi Form.
   final _formKey = GlobalKey<FormState>();
+
+  /// Mengontrol visibilitas teks pada field password.
   bool _obscureText = true;
 
+  // ==================== Logic Methods ====================
+
+  /// Memvalidasi input dan melakukan navigasi jika valid.
   void _submitLogin() {
     final isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) {
@@ -23,8 +32,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  // ==================== Build Method ====================
+  // Metode utama yang merender seluruh UI halaman login.
+
   @override
   Widget build(BuildContext context) {
+    // --- Definisi Warna Lokal ---
     const Color buttonBgColor = Colors.white;
     const Color borderColor = Color(0xFFE0E0E0);
     const Color darkTextColor = Color(0xFF312E2B);
@@ -41,11 +54,14 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // ---------- Logo Aplikasi ----------
                   Image.asset(
                     'assets/images/note_logo.png',
                     height: 100,
                   ),
                   const SizedBox(height: 48.0),
+
+                  // ---------- Tombol Login Sosial ----------
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -57,6 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   const SizedBox(height: 24.0),
+
+                  // ---------- Pemisah "OR" ----------
                   Row(
                     children: const [
                       Expanded(child: Divider(color: borderColor, thickness: 1)),
@@ -68,6 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   const SizedBox(height: 24.0),
+
+                  // ---------- Form Input Email ----------
                   TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Email',
@@ -98,6 +118,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   const SizedBox(height: 16.0),
+
+                  // ---------- Form Input Password ----------
                   TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Password',
@@ -141,6 +163,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   const SizedBox(height: 32.0),
+
+                  // ---------- Tombol Sign In ----------
                   ElevatedButton(
                     onPressed: _submitLogin,
                     style: ElevatedButton.styleFrom(
@@ -160,6 +184,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 16.0),
+
+                  // ---------- Tombol Lupa Password ----------
                   TextButton(
                     onPressed: () {},
                     child: Text(
@@ -169,6 +195,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 32.0),
+
+                  // ---------- Tautan ke Halaman Sign Up ----------
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -197,6 +225,9 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  // ==================== Helper Widgets ====================
+
+  /// Membangun widget tombol untuk opsi login sosial agar kode tidak berulang.
   Widget _buildSocialButton(String imagePath, VoidCallback onPressed,
       {EdgeInsetsGeometry padding = const EdgeInsets.all(12.0)}) {
     return Expanded(
